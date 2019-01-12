@@ -99,9 +99,9 @@ class PointEnv(GoalEnv, MujocoEnv, Serializable):
         ob = self.get_current_obs()
         # print('current obs:', ob)
         done = False
-        if dist < self.reward_dist_threshold and self.indicator_reward:
-            # print("**DONE***")
-            done = True
+        # if dist < self.reward_dist_threshold and self.indicator_reward:
+        #     # print("**DONE***")
+        #     done = True
         return Step(
             ob, reward, done,
             reward_dist=reward_dist,

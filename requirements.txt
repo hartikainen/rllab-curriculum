@@ -22,5 +22,4 @@ pyglet
 prettytensor
 jupyter
 progressbar2
-chainer==1.18.0
 tensorflow>=0.11.0

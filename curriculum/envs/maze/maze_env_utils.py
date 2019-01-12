@@ -217,6 +217,16 @@ def construct_maze(maze_id=0, length=1):
         structure.append(
             [1, ] * (length + 2),
         )
+    elif maze_id == 13:  # for goalGAN paper: 3 corridors
+        structure = [
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 0, 0, 0, 0, 0, 1],
+            [1, 0, 1, 1, 1, 0, 1],
+            [1, 'r', 0, 0, 0, 0, 1],
+            [1, 0, 1, 1, 1, 0, 1],
+            [1, 0, 0, 0, 0, 'g', 1],
+            [1, 1, 1, 1, 1, 1, 1],
+        ]
 
     # elif maze_id == 12:  # no maze, goal in the middle
     #     structure = [
