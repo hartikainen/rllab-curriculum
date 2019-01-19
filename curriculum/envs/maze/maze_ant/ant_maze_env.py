@@ -17,19 +17,26 @@ class AntMazeEnv(MazeEnv):
     # MANUAL_COLLISION = True  # this is in point_mass
     # MAZE_MAKE_CONTACTS = True  # this is in rllab
 
-    def reset_goal(self):
-        y_length = (
-            len(self.MAZE_STRUCTURE)
-            * self.MAZE_SIZE_SCALING
-            - self._init_torso_y)
-        x_length = (
-            len(self.MAZE_STRUCTURE[0])
-            * self.MAZE_SIZE_SCALING
-            - self._init_torso_x)
+    def __init__(self, *args, **kwargs):
+        self.fixed_goal = None
+        super(AntMazeEnv, self).__init__(*args, **kwargs)
 
-        goal_position = np.random.uniform([0, 0], [x_length, y_length])
-        while not self.is_feasible(goal_position):
+    def update_goal_position(self):
+        if self.fixed_goal is not None:
+            goal_position = self.fixed_goal[:2]
+        else:
+            y_length = (
+                len(self.MAZE_STRUCTURE)
+                * self.MAZE_SIZE_SCALING
+                - self._init_torso_y)
+            x_length = (
+                len(self.MAZE_STRUCTURE[0])
+                * self.MAZE_SIZE_SCALING
+                - self._init_torso_x)
+
             goal_position = np.random.uniform([0, 0], [x_length, y_length])
+            while not self.is_feasible(goal_position):
+                goal_position = np.random.uniform([0, 0], [x_length, y_length])
 
         goal_velocity = np.array([0, 0])
 
