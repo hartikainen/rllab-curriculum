@@ -73,6 +73,11 @@ class MazeEnv(ProxyEnv, Serializable):
         self._init_torso_x = torso_x
         self._init_torso_y = torso_y
 
+        maze_y_size = (len(self.MAZE_STRUCTURE) - 1) * size_scaling
+        maze_x_size = (len(self.MAZE_STRUCTURE[0]) - 1) * size_scaling
+        self.min_x, self.max_x = 0.0 - torso_x, maze_x_size - torso_x
+        self.min_y, self.max_y = 0.0 - torso_y, maze_y_size - torso_y
+
         for i in range(len(structure)):
             for j in range(len(structure[0])):
                 if str(structure[i][j]) == '1':
